@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import {CardList} from './components/card-list/card-list.component';
 class App extends Component {
   constructor(){
     super();
@@ -21,22 +22,13 @@ class App extends Component {
   render() {  
     return (  
     <div className="App"> 
-      {
-        this.state.monster.map(monster => <h1 key={monster._id}>{monster.monster}</h1>)
-        
-      }
+        <CardList name="Roniel">
+          {
+            this.state.monster.map(monster => <h1 key={monster._id}>{monster.monster} {monster.description}</h1> )
+          }
+        </CardList>
     </div>  
     )
   }
-  // <p>Hi my name is {this.state.string} and my age is {this.state.age}</p>
-  // <button onClick={()=>{
-  //   this.setState({
-  //     string: 'Rogine',
-  //     age: this.state.age + 1,
-      
-  //   })
-  // }}>Change Text</button>
 }
-
-
 export default App;
