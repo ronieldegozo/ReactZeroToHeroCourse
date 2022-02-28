@@ -10,17 +10,20 @@ class App extends Component {
     }
   }
   componentDidMount(){
-    fetch('https://jsonplaceholder.typicode.com/users')
+    fetch('http://localhost:8080')
     .then(response => response.json())
-    .then(users =>       this.setState({
-      monster: users
-    }))
+
+      .then(users => this.setState({
+        monster: users.monster
+      }))
+
   }
-  render() {
+  render() {  
     return (  
     <div className="App"> 
       {
-        this.state.monster.map(monster => <h1 key={monster.id}>{monster.name}</h1>)
+        this.state.monster.map(monster => <h1 key={monster._id}>{monster.monster}</h1>)
+        
       }
     </div>  
     )
@@ -37,25 +40,3 @@ class App extends Component {
 
 
 export default App;
-
-// function App() {
-//   return (  
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
