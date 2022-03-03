@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-import {CardList} from './components/card-list/card-list.component';
+import CardLists from './components/card-list/card-list.component';
 class App extends Component {
   constructor(){
     super();
@@ -11,38 +11,37 @@ class App extends Component {
       search: ''
     }
   }
-
+  //FETCH API
   componentDidMount(){
-    fetch('https://monster-api-project.herokuapp.com')
+    fetch('https://monster-api-project.herokuapp.com/monsters')
     .then(response => response.json())
 
       .then(users => this.setState({
         monster: users.monster
       }))
-
+  
   }
-  render() {  
 
-    const filtredMonserData = this.state.monster.filter((monster) =>{
-      return monster.monster.toLowerCase().includes(this.state.search);
-    })  
+  //SEARCH FUNCTION
+    onSearchChange = (event) =>{ //FILTERED SEARCH
+      const search = event.target.value.toLocaleLowerCase();
+      this.setState(()=>{  
+        return {search}
+      })
+      console.log('Youre search a: ',search);
+    }
+
+  render() {  
+    const { monster, search } = this.state;
+    const { onSearchChange } = this;  
+    const filteredMonster = monster.filter((monster)=>{
+      return monster.monster.toLocaleLowerCase().includes(search);
+    })
 
     return (  
     <div className="App">   
-        <input className='Search' type='search' placeholder='Monster' onChange={(event) =>{ //FILTERED SEARCH
-
-          const search = event.target.value.toLowerCase();
-          this.setState(()=>{  
-            return {search}
-          })
-          console.log(search);
-        }} />
-
-        <CardList name="Roniel">
-          {
-            filtredMonserData.map(monster => <h1 key={monster._id}>{monster.monster} {monster.description}</h1> )
-          }
-        </CardList>
+        <input className='Search' type='search' placeholder='Monster' onChange={onSearchChange} />
+        <CardLists monster={filteredMonster} />
     </div>  
     )
   }
