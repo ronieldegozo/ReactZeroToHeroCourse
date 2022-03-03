@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import CardLists from './components/card-list/card-list.component';
+import SearchBox from './components/search-box/search-box.components';
 class App extends Component {
   constructor(){
     super();
@@ -28,7 +29,6 @@ class App extends Component {
       this.setState(()=>{  
         return {search}
       })
-      console.log('Youre search a: ',search);
     }
 
   render() {  
@@ -40,7 +40,7 @@ class App extends Component {
 
     return (  
     <div className="App">   
-        <input className='Search' type='search' placeholder='Monster' onChange={onSearchChange} />
+        <SearchBox onChangeHandlerss={onSearchChange} placeholder='Search Here!' className='Search Box'/>
         <CardLists monster={filteredMonster} />
     </div>  
     )
