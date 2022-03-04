@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Yellowtail&display=swap');
+.monster-search-box{
+    color: rgb(110, 108, 108);
+    width: 50%;
+    padding: 1%;
+}
+.monster-header{
+
+    font-family: 'Pacifico', cursive;
+    color: red;
+    font-size: 88px;
+}
