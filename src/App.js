@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState , sideEffect} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -7,14 +7,23 @@ import SearchBox from './components/search-box/search-box.components';
 
 const App = () =>{
 
+  const [search, setSearch]= useState('') //Value and set 
+  const [monster, setMonsters] = useState([]);
+  console.log('Renedering App');
 
-  const [search, setSearch]= useState('') //Value and set value
-  console.log({search})
-
+  fetch('https://monster-api-project.herokuapp.com/monsters')
+    .then((response) => response.json())
+    .then((users) => setMonsters(users.monster) //FETCH MONSTER BY SPECIFIC MONSTER NAME
+  ); //set the state
+  
   const onSearchChange = (event) =>{ //FILTERED SEARCH
       const searchFieldString = event.target.value.toLocaleLowerCase();
       setSearch(searchFieldString);
   };
+  
+  const filteredMonster = monster.filter((monster)=>{
+     return monster.monster.toLocaleLowerCase().includes(search);
+  })
 
   return (
       <div className="App">   
@@ -24,8 +33,8 @@ const App = () =>{
           placeholder='Search Here!' 
           className='monster-search-box'
         />
-        {/* <CardLists monster={filteredMonster} /> */}
-    </div>  
+        <CardLists monster={filteredMonster} />
+    </div>    
   )
 }
 
