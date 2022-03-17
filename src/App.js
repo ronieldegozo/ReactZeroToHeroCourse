@@ -9,7 +9,7 @@ const App = () =>{
 
   const [search, setSearch]= useState('') //Value and set 
   const [monster, setMonsters] = useState([]);
-
+  const [title, setTitle] = useState(''); //DOM
   const {filteredMonsterDate, setFiltermMonsters} = useState(monster);
   const [stringField, setStringField] = useState('');
 
@@ -41,6 +41,12 @@ const App = () =>{
       const searchFieldString = event.target.value.toLocaleLowerCase();
       setSearch(searchFieldString);
   };
+
+  
+  const onTitleChange = (event) =>{ //FILTERED SEARCH
+    const searchFieldString = event.target.value.toLocaleLowerCase();
+    setTitle(searchFieldString);
+};
   
   const filteredMonster = monster.filter((monster)=>{
     return monster.monster.toLocaleLowerCase().includes(search);
@@ -49,7 +55,7 @@ const App = () =>{
 
   return (
       <div className="App">   
-          <h1 className='monster-header'>Monster Data Platform </h1>
+          <h1 className='monster-header'>{title} </h1>
         <SearchBox 
           onChangeHandlerss={onSearchChange} 
           placeholder='Search Here!' 
@@ -59,6 +65,12 @@ const App = () =>{
           onChangeHandlerss={onStringChange} 
           placeholder='Search Here!2' 
           className='monster-search-box'
+        />
+        <br/>
+        <SearchBox 
+          onChangeHandlerss={onTitleChange}
+          placeholder='Search Set Title' 
+          className='title'
         />
 
 <CardLists monster={filteredMonster} />
